@@ -3,10 +3,7 @@ package com.example.restfulwebservices01in28minutes.user;
 import org.springframework.stereotype.Component;
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class UserDaoService {
@@ -33,8 +30,21 @@ public class UserDaoService {
     }
 
     public User findOne(int id) {
-        for(User user: users) {
+        for (User user : users) {
             if (user.getId() == id) {
+                return user;
+            }
+        }
+
+        return null;
+    }
+
+    public User deleteById(int id) {
+        Iterator<User> iterator = users.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId() == id) {
+                iterator.remove();
                 return user;
             }
         }
