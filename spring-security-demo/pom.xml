@@ -11,8 +11,8 @@
 	<name>spring-security-demo</name>
 
 	<properties>
-		<springframework.version>5.0.4.RELEASE</springframework.version>
-		<springsecurity.version>5.0.3.RELEASE</springsecurity.version>
+		<springframework.version>5.0.5.RELEASE</springframework.version>
+		<springsecurity.version>5.0.4.RELEASE</springsecurity.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -32,12 +32,20 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-
+		
+		<!-- Add Spring Security Taglibs support -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		
 		<!-- Servlet, JSP and JSTL support -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
