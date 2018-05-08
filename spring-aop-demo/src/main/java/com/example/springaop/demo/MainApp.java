@@ -19,6 +19,8 @@ public class MainApp {
 		// call the business method
 		accountDAO.addAccount();
 		
+		accountDAO.addSomething();
+		
 		membershipDAO.addAccount();
 		
 		// close the context
