@@ -27,6 +27,12 @@ public class MainApp {
 		accountDAO.addAccount(account);
 		accountDAO.addAccount(account, true);
 		
+		accountDAO.setName("foobar");
+		accountDAO.setServiceCode("silver");
+		
+		accountDAO.getName();
+		accountDAO.getServiceCode();
+		
 		// close the context
 		context.close();
 	}
