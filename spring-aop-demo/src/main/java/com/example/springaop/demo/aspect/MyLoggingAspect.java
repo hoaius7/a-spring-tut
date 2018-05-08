@@ -53,4 +53,9 @@ public class MyLoggingAspect {
 		System.out.println("\n=====>>> Executing @Before advice on any method, class in a package");
 	}
 	
+	@Before("forDaoPackage()")
+	public void performApiAnalytics() {
+		System.out.println("\n=====>>> Performing API analytics");
+	}
+	
 }
