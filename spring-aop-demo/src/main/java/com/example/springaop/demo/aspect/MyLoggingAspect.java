@@ -28,4 +28,24 @@ public class MyLoggingAspect {
 		System.out.println("\n=====>>> Executing @Before advice on add* that return anything()");
 	}
 
+	@Before("execution(* add*(com.example.springaop.demo.Account))")
+	public void beforeAddWithAccountParam() {
+		System.out.println("\n=====>>> Executing @Before advice on add* that have Account param()");
+	}
+	
+	@Before("execution(* add*(com.example.springaop.demo.Account, ..))")
+	public void beforeAddWithAccountParamAndOtherParams() {
+		System.out.println("\n=====>>> Executing @Before advice on add* that have Account param and other params");
+	}
+	
+	@Before("execution(* add*(..))")
+	public void beforeAddWithAnyParam() {
+		System.out.println("\n=====>>> Executing @Before advice on add* that have any params");
+	}
+	
+	@Before("execution(* com.example.springaop.demo.dao.*.*(..))")
+	public void beforeOnAnyMethodClassInPackage() {
+		System.out.println("\n=====>>> Executing @Before advice on any method, class in a package");
+	}
+	
 }

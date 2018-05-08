@@ -23,6 +23,10 @@ public class MainApp {
 		
 		membershipDAO.addAccount();
 		
+		Account account = new Account();
+		accountDAO.addAccount(account);
+		accountDAO.addAccount(account, true);
+		
 		// close the context
 		context.close();
 	}
