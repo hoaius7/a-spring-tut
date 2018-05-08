@@ -22,4 +22,10 @@ public class MyLoggingAspect {
 	public void beforeAddAdvice() {
 		System.out.println("\n=====>>> Executing @Before advice on add*()");
 	}
+
+	@Before("execution(* add*())")
+	public void beforeAddAnyReturnAdvice() {
+		System.out.println("\n=====>>> Executing @Before advice on add* that return anything()");
+	}
+
 }
