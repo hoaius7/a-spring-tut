@@ -20,10 +20,21 @@ public class MyLoggingAspect {
 			returning = "result")
 	public void afterReturningFindAccountsAdvice(
 			JoinPoint joinPoint, List<Account> result) {
+		
 		String method = joinPoint.getSignature().toShortString();
 		System.out.println("\n=====>>> Executing @AfterReturning on method: " + method);
+		
 		System.out.println("\n=====>>> result is: " + result);
 		
+		convertAccountNamesToUpperCase(result);
+		
+		System.out.println("\n=====>>> result is: " + result);
+	}
+	
+	private void convertAccountNamesToUpperCase(List<Account> accounts) {
+		for (Account account: accounts) {
+			account.setName(account.getName().toUpperCase());
+		}
 	}
 	
 	@Before("execution(public void com.example.springaop.demo.dao.AccountDAO.addAccount())")
