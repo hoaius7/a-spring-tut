@@ -24,6 +24,8 @@ public class MainApp {
 		membershipDAO.addAccount();
 		
 		Account account = new Account();
+		account.setName("Duke");
+		account.setLevel("gold");
 		accountDAO.addAccount(account);
 		accountDAO.addAccount(account, true);
 		
