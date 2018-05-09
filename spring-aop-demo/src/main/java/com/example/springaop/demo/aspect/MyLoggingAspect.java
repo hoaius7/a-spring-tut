@@ -1,6 +1,7 @@
 package com.example.springaop.demo.aspect;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,10 +21,12 @@ import com.example.springaop.demo.Account;
 @Order(2)
 public class MyLoggingAspect {
 	
+	private Logger logger = Logger.getLogger(MyLoggingAspect.class.getName());
+	
 	@Around("execution(* com.example.springaop.demo.service.*.getFortune(..))")
 	public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		String method = proceedingJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executing @Around on method: " + method);
+		logger.info("\n=====>>> Executing @Around on method: " + method);
 		
 		long begin = System.currentTimeMillis();
 		
@@ -33,7 +36,7 @@ public class MyLoggingAspect {
 		
 		long duration = end - begin;
 		
-		System.out.println("\n=====> Duration: " + duration / 1000.0 + " seconds");
+		logger.info("\n=====> Duration: " + duration / 1000.0 + " seconds");
 		
 		return result;
 	}
@@ -41,16 +44,16 @@ public class MyLoggingAspect {
 	@After("execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))")
 	public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
 		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executing @After on method: " + method);
+		logger.info("\n=====>>> Executing @After on method: " + method);
 	}
 	
 	@AfterThrowing(pointcut = "execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))",
 			throwing = "exp")
 	public void afterThrowingFindAccoundsAdvice(JoinPoint joinPoint, Throwable exp) {
 		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executing @AfterThrowing on method: " + method);
+		logger.info("\n=====>>> Executing @AfterThrowing on method: " + method);
 		
-		System.out.println("\n=====>>> The exception is: " + exp);
+		logger.info("\n=====>>> The exception is: " + exp);
 	}
 	
 	@AfterReturning(pointcut = "execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))",
@@ -59,13 +62,13 @@ public class MyLoggingAspect {
 			JoinPoint joinPoint, List<Account> result) {
 		
 		String method = joinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executing @AfterReturning on method: " + method);
+		logger.info("\n=====>>> Executing @AfterReturning on method: " + method);
 		
-		System.out.println("\n=====>>> result is: " + result);
+		logger.info("\n=====>>> result is: " + result);
 		
 		convertAccountNamesToUpperCase(result);
 		
-		System.out.println("\n=====>>> result is: " + result);
+		logger.info("\n=====>>> result is: " + result);
 	}
 	
 	private void convertAccountNamesToUpperCase(List<Account> accounts) {
@@ -76,42 +79,42 @@ public class MyLoggingAspect {
 	
 	@Before("execution(public void com.example.springaop.demo.dao.AccountDAO.addAccount())")
 	public void beforeAddAccountOnAccountDAOAdvice() {
-		System.out.println("\n=====>>> Executing @Before advice on AccountDAO.addAccount()");
+		logger.info("\n=====>>> Executing @Before advice on AccountDAO.addAccount()");
 	}
 
 	@Before("execution(public void addAccount())")
 	public void beforeAddAccountAdvice() {
-		System.out.println("\n=====>>> Executing @Before advice on addAccount()");
+		logger.info("\n=====>>> Executing @Before advice on addAccount()");
 	}
 
 	@Before("execution(public void add*())")
 	public void beforeAddAdvice() {
-		System.out.println("\n=====>>> Executing @Before advice on add*()");
+		logger.info("\n=====>>> Executing @Before advice on add*()");
 	}
 
 	@Before("execution(* add*())")
 	public void beforeAddAnyReturnAdvice() {
-		System.out.println("\n=====>>> Executing @Before advice on add* that return anything()");
+		logger.info("\n=====>>> Executing @Before advice on add* that return anything()");
 	}
 
 	@Before("execution(* add*(com.example.springaop.demo.Account))")
 	public void beforeAddWithAccountParam() {
-		System.out.println("\n=====>>> Executing @Before advice on add* that have Account param()");
+		logger.info("\n=====>>> Executing @Before advice on add* that have Account param()");
 	}
 	
 	@Before("execution(* add*(com.example.springaop.demo.Account, ..))")
 	public void beforeAddWithAccountParamAndOtherParams() {
-		System.out.println("\n=====>>> Executing @Before advice on add* that have Account param and other params");
+		logger.info("\n=====>>> Executing @Before advice on add* that have Account param and other params");
 	}
 	
 	@Before("execution(* add*(..))")
 	public void beforeAddWithAnyParam() {
-		System.out.println("\n=====>>> Executing @Before advice on add* that have any params");
+		logger.info("\n=====>>> Executing @Before advice on add* that have any params");
 	}
 	
 	@Before("com.example.springaop.demo.aspect.AopExpressions.forDaoPackageNoGetterSetter()")
 	public void beforeOnAnyMethodClassInPackage() {
-		System.out.println("\n=====>>> Executing @Before advice on any method, class in a package");
+		logger.info("\n=====>>> Executing @Before advice on any method, class in a package");
 	}
 	
 }
