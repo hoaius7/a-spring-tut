@@ -3,9 +3,11 @@ package com.example.springaop.demo.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -17,6 +19,24 @@ import com.example.springaop.demo.Account;
 @Component
 @Order(2)
 public class MyLoggingAspect {
+	
+	@Around("execution(* com.example.springaop.demo.service.*.getFortune(..))")
+	public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		String method = proceedingJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====>>> Executing @Around on method: " + method);
+		
+		long begin = System.currentTimeMillis();
+		
+		Object result = proceedingJoinPoint.proceed();
+		
+		long end = System.currentTimeMillis();
+		
+		long duration = end - begin;
+		
+		System.out.println("\n=====> Duration: " + duration / 1000.0 + " seconds");
+		
+		return result;
+	}
 	
 	@After("execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))")
 	public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
