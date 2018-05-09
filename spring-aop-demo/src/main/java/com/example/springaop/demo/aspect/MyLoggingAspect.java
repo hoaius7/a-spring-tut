@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -15,6 +16,15 @@ import com.example.springaop.demo.Account;
 @Component
 @Order(2)
 public class MyLoggingAspect {
+	
+	@AfterThrowing(pointcut = "execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))",
+			throwing = "exp")
+	public void afterThrowingFindAccoundsAdvice(JoinPoint joinPoint, Throwable exp) {
+		String method = joinPoint.getSignature().toShortString();
+		System.out.println("\n=====>>> Executing @AfterThrowing on method: " + method);
+		
+		System.out.println("\n=====>>> The exception is: " + exp);
+	}
 	
 	@AfterReturning(pointcut = "execution(* com.example.springaop.demo.dao.AccountDAO.findAccounts(..))",
 			returning = "result")

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.example.springaop.demo.dao.AccountDAO;
 
-public class MainAppAfterReturning {
+public class MainAppAfterThrowing {
 
 	public static void main(String[] args) {
 		// read spring config Java class
@@ -15,16 +15,9 @@ public class MainAppAfterReturning {
 		// get the bean from Spring container
 		AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
 		
-		List<Account> accounts = null;
+		List<Account> accounts = accountDAO.findAccounts(false);
 		
-		try { 
-			boolean tripWire = true;
-			accounts = accountDAO.findAccounts(tripWire);
-		} catch (Exception e) {
-			System.out.println("\nMain Program ... caught exception: " + e);
-		}
-		
-		System.out.println("\nMain Program: AfterThrowingDemoApp");
+		System.out.println("\nMain Program: AfterReturningDemoApp");
 		System.out.println("-----");
 		
 		System.out.println(accounts);
