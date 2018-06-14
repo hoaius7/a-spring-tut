@@ -33,7 +33,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
   }
 
-  @Override
+
+  @Override // Implementing Validations for RESTful Services
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
       HttpHeaders headers, HttpStatus status, WebRequest request) {
     ExceptionResponse exceptionResponse =
@@ -41,5 +42,4 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
   }
-
 }
