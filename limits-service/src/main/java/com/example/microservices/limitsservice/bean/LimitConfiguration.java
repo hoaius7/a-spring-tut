@@ -1,23 +1,22 @@
 package com.example.microservices.limitsservice.bean;
 
 public class LimitConfiguration {
-  private int maximum;
   private int minimum;
+  private int maximum;
 
-  public LimitConfiguration(int maximum, int minimum) {
-    this.maximum = maximum;
+  public LimitConfiguration(int minimum, int maximum) {
     this.minimum = minimum;
+    this.maximum = maximum;
   }
 
   protected LimitConfiguration() {}
-
-  public int getMaximum() {
-    return maximum;
-  }
 
   public int getMinimum() {
     return minimum;
   }
 
+  public int getMaximum() {
+    return maximum;
+  }
 
 }
